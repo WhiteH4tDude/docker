@@ -3,8 +3,7 @@
 ## https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/
 
 # Use the base image with PyTorch and CUDA support
-FROM pytorch/pytorch:2.0.1-cuda11.7-cudnn8-devel
-
+FROM pytorch/pytorch:2.3.1-cuda11.8-cudnn8-devel
 
 # NOTE:
 # Building the libraries for this repository requires cuda *DURING BUILD PHASE*, therefore:
@@ -16,6 +15,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Update and install tzdata separately
 RUN apt update && apt install -y tzdata
+RUN apt-get update -y
 
 # Install necessary packages
 RUN apt install -y git && \
@@ -25,6 +25,11 @@ RUN apt install -y git && \
 # Create a workspace directory and clone the repository
 WORKDIR /workspace
 RUN git clone https://github.com/graphdeco-inria/gaussian-splatting --recursive
+
+RUN wget https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/evaluation/images.zip
+RUN mkdir gaussian-splatting/samples
+RUN mv images.zip gaussian-splatting/samples
+RUN ls gaussian-splatting/samples
 
 # Create a Conda environment and activate it
 WORKDIR /workspace/gaussian-splatting
