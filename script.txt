@@ -3,6 +3,7 @@ apt-get update
 
 apt-get install nano -y
 apt-get install git -y
+apt-get install wget -y
 
 apt install ubuntu-drivers-common -y
 apt install build-essential -y
