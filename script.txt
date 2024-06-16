@@ -1,7 +1,7 @@
 apt update
 apt-get update
 
-apt-get install nano -y && apt-get install git -y && apt-get install wget -y && apt-get install libxml2 -y && apt install ubuntu-drivers-common -y && apt install build-essential -y
+apt-get install nano -y && apt-get install git -y && apt-get install wget -y && apt-get install libxml2 -y && apt install ubuntu-drivers-common -y && apt install build-essential -y && agt-get install unzip
 
 gcc --version
 
@@ -44,4 +44,10 @@ pip install submodules/diff-gaussian-rasterization
 
 // Now you are ready :D 
 // https://github.com/r4dl/StopThePop
+
+cd ..
+wget https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/evaluation/images.zip
+mkdir StopThePop/samples
+
+unzip images.zip StopThePop/samples
 
