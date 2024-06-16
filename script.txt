@@ -5,7 +5,7 @@ apt-get install nano -y
 apt-get install git -y
 
 apt install ubuntu-drivers-common -y
-sudo apt install build-essential -y
+apt install build-essential -y
 
 gcc --version
 
