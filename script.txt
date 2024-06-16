@@ -28,7 +28,16 @@ git clone https://github.com/r4dl/StopThePop --recursive
 
 cd StopThePop
 
+conda update conda
+conda update conda-build
+
+conda install -n base conda-libmamba-solver
+conda config --set solver libmamba
+
 conda env create --file environment_cuda12.yml
+conda init
+
+// Saia e rode novamente com docker exec -it <name/id> /bin/bash
 conda activate stopthepop
 
 pip install submodules/diff-gaussian-rasterization
