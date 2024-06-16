@@ -49,5 +49,7 @@ cd ..
 wget https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/evaluation/images.zip
 mkdir StopThePop/samples
 
-unzip images.zip StopThePop/samples
+unzip images.zip .
 
+cd StopThePop
+python train.py --splatting_config configs/hierarchical.json -s <path>
