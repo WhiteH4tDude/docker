@@ -15,8 +15,8 @@ sh cuda_12.4.0_550.54.14_linux.run
 nano /home/$USER/.bashrc
 
 // Escreva o texto abaixo no terminal
-export PATH="/usr/local/cuda-8.0/bin:$PATH" 
-export LD_LIBRARY_PATH="/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH"
+export PATH="/usr/local/cuda-12.4/bin:$PATH" 
+export LD_LIBRARY_PATH="/usr/local/cuda-12.4/lib64:$LD_LIBRARY_PATH"
 
 // Ctrl + O > ENTER > Ctrl + X
 
