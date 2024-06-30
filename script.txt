@@ -49,7 +49,7 @@ pip install submodules/diff-gaussian-rasterization
 wget https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/datasets/input/tandt_db.zip
 unzip tandt_db.zip
 
-// Para prosseguir nesse script, rode a instalação abaixo só por garantia. Fiz isso antes de prosseguir :v
+// Para prosseguir nesse script, rode a instalação e o export abaixo, só por garantia. Fiz isso antes de prosseguir :v
 apt-get install -y \
     git \
     cmake \
@@ -72,6 +72,8 @@ apt-get install -y \
     libqt5opengl5-dev \
     libcgal-dev \
     libceres-dev
+
+ export CUDACXX=/usr/local/cuda-12.4/bin
 
 // Para iniciar o treinamento, é necessário rodar o colmap nas imagens. Então, vamos lá...
 conda create -n colmap -c conda-forge colmap
