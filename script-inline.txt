@@ -1,0 +1,67 @@
+apt update && apt-get update && apt-get install nano -y && apt-get install git -y && apt-get install wget -y && apt-get install libxml2 -y && apt install ubuntu-drivers-common -y && apt install build-essential -y && apt-get install unzip && gcc --version && nvidia-smi && wget https://developer.download.nvidia.com/compute/cuda/12.4.0/local_installers/cuda_12.4.0_550.54.14_linux.run
+
+// Desmarque a opção para instalar o driver da NVIDIA (ignore por enquanto se ele der erro... apenas prossiga).
+sh cuda_12.4.0_550.54.14_linux.run
+
+nano /home/$USER/.bashrc
+
+// Escreva o texto abaixo no terminal
+export PATH="/usr/local/cuda-12.4/bin:$PATH" 
+export LD_LIBRARY_PATH="/usr/local/cuda-12.4/lib64:$LD_LIBRARY_PATH"
+
+// Ctrl + O > ENTER > Ctrl + X
+
+source /home/$USER/.bashrc
+
+nvcc --version
+
+git clone https://github.com/r4dl/StopThePop --recursive && cd StopThePop && conda update conda && conda update conda-build && conda install -n base conda-libmamba-solver && conda config --set solver libmamba && conda env create --file environment_cuda12.yml && conda init
+
+// Saia e rode novamente com docker exec -it <name/id> /bin/bash (se falhar, tente rodar o docker start <name/id>)
+conda activate stopthepop && pip install submodules/diff-gaussian-rasterization
+
+// Now you are ready :D 
+// https://github.com/r4dl/StopThePop
+
+// Faça download das imagens usando o comando abaixo.
+wget https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/evaluation/images.zip
+unzip images.zip
+
+// Para prosseguir nesse script, rode a instalação abaixo só por garantia. Fiz isso antes de prosseguir :v
+apt-get install -y \
+    git \
+    cmake \
+    ninja-build \
+    build-essential \
+    libboost-program-options-dev \
+    libboost-filesystem-dev \
+    libboost-graph-dev \
+    libboost-system-dev \
+    libboost-test-dev \
+    libeigen3-dev \
+    libflann-dev \
+    libfreeimage-dev \
+    libmetis-dev \
+    libgoogle-glog-dev \
+    libgflags-dev \
+    libsqlite3-dev \
+    libglew-dev \
+    qtbase5-dev \
+    libqt5opengl5-dev \
+    libcgal-dev \
+    libceres-dev
+
+// Para iniciar o treinamento, é necessário rodar o colmap nas imagens. Então, vamos lá...
+conda create -n colmap -c conda-forge colmap && conda config --set auto_activate_base false && conda activate colmap
+
+// O diretório das imagens deve ter OBRIGATORIAMENTE o nome "input". Então, se as suas imagens
+// estão em "path_das_imagens/alguma_coisa", mude para "path_das_imagens/input" e rode o comando abaixo:
+python convert.py -s path_das_imagens
+
+// Agora vamos para o treinamento...
+conda activate stopthepop
+
+python train.py --splatting_config configs/hierarchical.json -s <path_das_imagens>
+
+// Lembrando, o "path_das_imagens" é um diretório que contém um diretório chamado "input" que irá conter as imagens brutas.
+
