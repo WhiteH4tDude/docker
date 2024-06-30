@@ -24,8 +24,8 @@ conda activate stopthepop && pip install submodules/diff-gaussian-rasterization
 // https://github.com/r4dl/StopThePop
 
 // Faça download das imagens usando o comando abaixo.
-wget https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/evaluation/images.zip
-unzip images.zip
+wget https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/datasets/input/tandt_db.zip
+unzip tandt_db.zip
 
 // Para prosseguir nesse script, rode a instalação abaixo só por garantia. Fiz isso antes de prosseguir :v
 apt-get install -y \
